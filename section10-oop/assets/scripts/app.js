@@ -1,10 +1,12 @@
 class Product {
+  // (Public) Class Field
   // title = 'DEFAULT';
   // imageUrl;
   // description;
   // price;
 
   constructor(title, image, desc, price) {
+    //(Public) Class Property
     this.title = title;
     this.imageUrl = image;
     this.description = desc;
@@ -46,7 +48,7 @@ class ProductItem {
     prodEl.className = 'product-item';
     prodEl.innerHTML = `
         <div>
-          <img src="${this.product.imageUrl}" alt="${this.product.title}" >
+          <img src="${this.product.imageUrl}" alt="${this.product.title}">
           <div class="product-item__content">
             <h2>${this.product.title}</h2>
             <h3>\$${this.product.price}</h3>
@@ -94,9 +96,10 @@ class ProductList {
 class Shop {
   render() {
     const renderHook = document.getElementById('app');
-
+    //
     this.cart = new ShoppingCart();
     const cartEl = this.cart.render();
+    //
     const productList = new ProductList();
     const prodListEl = productList.render();
 
@@ -119,4 +122,6 @@ class App {
   }
 }
 
+// 인스턴스화 할 필요 없이(const app = new App),
+// init method를 클래스에서 바로 실행
 App.init();
