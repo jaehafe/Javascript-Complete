@@ -1,12 +1,10 @@
 class Product {
-  // (Public) Class Field
   // title = 'DEFAULT';
   // imageUrl;
   // description;
   // price;
 
   constructor(title, image, desc, price) {
-    //(Public) Class Property
     this.title = title;
     this.imageUrl = image;
     this.description = desc;
@@ -65,7 +63,6 @@ class ShoppingCart extends Component {
   }
 
   constructor(renderHookId) {
-    // 부모 클래스의 생성자를 호출
     super(renderHookId, false);
     this.orderProducts = () => {
       console.log('Ordering...');
@@ -87,7 +84,8 @@ class ShoppingCart extends Component {
       <button>Order Now!</button>
     `;
     const orderButton = cartEl.querySelector('button');
-    orderButton.addEventListener('click', () => this.orderProducts());
+    // orderButton.addEventListener('click', () => this.orderProducts());
+    orderButton.addEventListener('click', this.orderProducts);
     this.totalOutput = cartEl.querySelector('h2');
   }
 }
@@ -107,7 +105,7 @@ class ProductItem extends Component {
     const prodEl = this.createRootElement('li', 'product-item');
     prodEl.innerHTML = `
         <div>
-          <img src="${this.product.imageUrl}" alt="${this.product.title}">
+          <img src="${this.product.imageUrl}" alt="${this.product.title}" >
           <div class="product-item__content">
             <h2>${this.product.title}</h2>
             <h3>\$${this.product.price}</h3>
@@ -122,15 +120,16 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  #products = []; // private
+  // Private
+  #products = [];
 
   constructor(renderHookId) {
     super(renderHookId, false);
     this.render();
-    this.fetchProduct();
+    this.#fetchProducts();
   }
 
-  fetchProduct() {
+  #fetchProducts() {
     this.#products = [
       new Product(
         'A Pillow',
@@ -171,7 +170,7 @@ class Shop {
 
   render() {
     this.cart = new ShoppingCart('app');
-    const list = new ProductList('app');
+    new ProductList('app');
   }
 }
 
@@ -188,6 +187,4 @@ class App {
   }
 }
 
-// 인스턴스화 할 필요 없이(const app = new App),
-// init method를 클래스에서 바로 실행
 App.init();
